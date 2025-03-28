@@ -8,8 +8,30 @@
 </head>
 <body>
     <header>
-        <h1>Мебельный магазин</h1>
-        <p>Качественная мебель для вашего дома</p>
+        <div class="slider">
+            <div class="slide active">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6" alt="Современная гостиная">
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace" alt="Спальня">
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84" alt="Кухня">
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84" alt="Рабочий кабинет">
+            </div>
+        </div>
+        <div class="header-content">
+            <h1>Мебельный магазин</h1>
+            <p>Создайте уютное пространство с нашей качественной мебелью</p>
+        </div>
+        <div class="slider-controls">
+            <div class="slider-dot active" data-slide="0"></div>
+            <div class="slider-dot" data-slide="1"></div>
+            <div class="slider-dot" data-slide="2"></div>
+            <div class="slider-dot" data-slide="3"></div>
+        </div>
     </header>
 
     <nav>
@@ -163,6 +185,35 @@
     </footer>
 
     <script>
+        // Функции для слайдера
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Автоматическое переключение слайдов
+        setInterval(nextSlide, 5000);
+
+        // Обработчики для точек навигации
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
         // Функции для чата
         function toggleChat() {
             const chat = document.querySelector('.chat-widget');
