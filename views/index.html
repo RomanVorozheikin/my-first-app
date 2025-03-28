@@ -20,62 +20,127 @@
     </nav>
 
     <main>
-        <h2 class="section-title">Популярные товары</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <span class="special-offer">-20%</span>
-                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Диван">
-                <h3>Уютный диван "Комфорт"</h3>
-                <p>Мягкий и просторный диван с подушками</p>
-                <p class="price">29,999 ₽</p>
-                <button onclick='addToCart({
-                    "name": "Уютный диван \"Комфорт\"",
-                    "description": "Мягкий и просторный диван с подушками",
-                    "price": 29999,
-                    "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
-                })'>В корзину</button>
-            </div>
+        <section class="section">
+            <div class="section-content">
+                <h2 class="section-title">Популярные товары</h2>
+                <p class="section-description">Откройте для себя нашу подборку самых востребованных товаров, которые помогут создать уютную атмосферу в вашем доме.</p>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <span class="special-offer">-20%</span>
+                        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Диван">
+                        <h3>Уютный диван "Комфорт"</h3>
+                        <p>Мягкий и просторный диван с подушками</p>
+                        <p class="price">29,999 ₽</p>
+                        <button onclick='addToCart({
+                            "name": "Уютный диван \"Комфорт\"",
+                            "description": "Мягкий и просторный диван с подушками",
+                            "price": 29999,
+                            "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
+                        })'>В корзину</button>
+                    </div>
 
-            <div class="product-card">
-                <span class="special-offer">-15%</span>
-                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Кровать">
-                <h3>Кровать "Соня"</h3>
-                <p>Ортопедическая кровать с матрасом</p>
-                <p class="price">34,999 ₽</p>
-                <button onclick='addToCart({
-                    "name": "Кровать \"Соня\"",
-                    "description": "Ортопедическая кровать с матрасом",
-                    "price": 34999,
-                    "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
-                })'>В корзину</button>
-            </div>
+                    <div class="product-card">
+                        <span class="special-offer">-15%</span>
+                        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Кровать">
+                        <h3>Кровать "Соня"</h3>
+                        <p>Ортопедическая кровать с матрасом</p>
+                        <p class="price">34,999 ₽</p>
+                        <button onclick='addToCart({
+                            "name": "Кровать \"Соня\"",
+                            "description": "Ортопедическая кровать с матрасом",
+                            "price": 34999,
+                            "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
+                        })'>В корзину</button>
+                    </div>
 
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Шкаф">
-                <h3>Шкаф "Практик"</h3>
-                <p>Вместительный шкаф с зеркалом</p>
-                <p class="price">24,999 ₽</p>
-                <button onclick='addToCart({
-                    "name": "Шкаф \"Практик\"",
-                    "description": "Вместительный шкаф с зеркалом",
-                    "price": 24999,
-                    "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
-                })'>В корзину</button>
-            </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Шкаф">
+                        <h3>Шкаф "Практик"</h3>
+                        <p>Вместительный шкаф с зеркалом</p>
+                        <p class="price">24,999 ₽</p>
+                        <button onclick='addToCart({
+                            "name": "Шкаф \"Практик\"",
+                            "description": "Вместительный шкаф с зеркалом",
+                            "price": 24999,
+                            "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
+                        })'>В корзину</button>
+                    </div>
 
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Стол">
-                <h3>Стол "Рабочий"</h3>
-                <p>Современный письменный стол</p>
-                <p class="price">12,999 ₽</p>
-                <button onclick='addToCart({
-                    "name": "Стол \"Рабочий\"",
-                    "description": "Современный письменный стол",
-                    "price": 12999,
-                    "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
-                })'>В корзину</button>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Стол">
+                        <h3>Стол "Рабочий"</h3>
+                        <p>Современный письменный стол</p>
+                        <p class="price">12,999 ₽</p>
+                        <button onclick='addToCart({
+                            "name": "Стол \"Рабочий\"",
+                            "description": "Современный письменный стол",
+                            "price": 12999,
+                            "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
+                        })'>В корзину</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="section">
+            <div class="section-content">
+                <h2 class="section-title">Каталог товаров</h2>
+                <p class="section-description">Исследуйте наш полный каталог мебели, где вы найдете все необходимое для создания идеального интерьера вашего дома.</p>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Диван">
+                        <h3>Диван "Семейный"</h3>
+                        <p>Большой диван для всей семьи</p>
+                        <p class="price">39,999 ₽</p>
+                        <button onclick='addToCart({
+                            "name": "Диван \"Семейный\"",
+                            "description": "Большой диван для всей семьи",
+                            "price": 39999,
+                            "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
+                        })'>В корзину</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Кровать">
+                        <h3>Кровать "Королевская"</h3>
+                        <p>Широкий диван-кровать</p>
+                        <p class="price">45,999 ₽</p>
+                        <button onclick='addToCart({
+                            "name": "Кровать \"Королевская\"",
+                            "description": "Широкий диван-кровать",
+                            "price": 45999,
+                            "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
+                        })'>В корзину</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Шкаф">
+                        <h3>Шкаф "Максимум"</h3>
+                        <p>Вместительный шкаф-купе</p>
+                        <p class="price">32,999 ₽</p>
+                        <button onclick='addToCart({
+                            "name": "Шкаф \"Максимум\"",
+                            "description": "Вместительный шкаф-купе",
+                            "price": 32999,
+                            "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
+                        })'>В корзину</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Стол">
+                        <h3>Стол "Обеденный"</h3>
+                        <p>Современный обеденный стол</p>
+                        <p class="price">18,999 ₽</p>
+                        <button onclick='addToCart({
+                            "name": "Стол \"Обеденный\"",
+                            "description": "Современный обеденный стол",
+                            "price": 18999,
+                            "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200"
+                        })'>В корзину</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <div class="chat-widget">
