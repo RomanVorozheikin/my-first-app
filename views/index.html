@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мебельный магазин - Главная</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Мебельный магазин</h1>
+        <p>Качественная мебель для вашего дома</p>
+    </header>
+
+    <nav>
+        <a href="/">Главная</a>
+        <a href="/about">О нас</a>
+        <a href="/todos">Задачи</a>
+    </nav>
+
+    <main>
+        <h2 class="section-title">Популярные товары</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <span class="special-offer">-20%</span>
+                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Диван">
+                <h3>Уютный диван "Комфорт"</h3>
+                <p>Мягкий и просторный диван с подушками</p>
+                <p class="price">29,999 ₽</p>
+                <button onclick="alert('Товар добавлен в корзину!')">В корзину</button>
+            </div>
+
+            <div class="product-card">
+                <span class="special-offer">-15%</span>
+                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Кровать">
+                <h3>Кровать "Соня"</h3>
+                <p>Ортопедическая кровать с матрасом</p>
+                <p class="price">34,999 ₽</p>
+                <button onclick="alert('Товар добавлен в корзину!')">В корзину</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Шкаф">
+                <h3>Шкаф "Практик"</h3>
+                <p>Вместительный шкаф с зеркалом</p>
+                <p class="price">24,999 ₽</p>
+                <button onclick="alert('Товар добавлен в корзину!')">В корзину</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200" alt="Стол">
+                <h3>Стол "Рабочий"</h3>
+                <p>Современный письменный стол</p>
+                <p class="price">12,999 ₽</p>
+                <button onclick="alert('Товар добавлен в корзину!')">В корзину</button>
+            </div>
+        </div>
+    </main>
+
+    <div class="chat-widget">
+        <div class="chat-header">
+            <h3>Поддержка</h3>
+            <button onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-messages">
+            <div class="message assistant">
+                Здравствуйте! Я ваш умный ассистент. Чем могу помочь?
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Введите ваше сообщение..." onkeypress="handleKeyPress(event)">
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Мебельный магазин. Все права защищены.</p>
+    </footer>
+
+    <script>
+        function toggleChat() {
+            const chat = document.querySelector('.chat-widget');
+            chat.style.display = chat.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                const input = event.target;
+                const message = input.value.trim();
+                if (message) {
+                    addMessage(message, 'user');
+                    input.value = '';
+                    // Имитация ответа ассистента
+                    setTimeout(() => {
+                        addMessage('Спасибо за ваше сообщение! Наш менеджер свяжется с вами в ближайшее время.', 'assistant');
+                    }, 1000);
+                }
+            }
+        }
+
+        function addMessage(text, type) {
+            const messages = document.querySelector('.chat-messages');
+            const message = document.createElement('div');
+            message.className = `message ${type}`;
+            message.textContent = text;
+            messages.appendChild(message);
+            messages.scrollTop = messages.scrollHeight;
+        }
+    </script>
+</body>
+</html> 

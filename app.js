@@ -18,7 +18,7 @@ app.use(express.static('public'));
 
 // Базовый маршрут
 app.get('/', (req, res) => {
-  res.send('Добро пожаловать в Мебельный магазин!');
+  res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
 // Маршрут О нас
