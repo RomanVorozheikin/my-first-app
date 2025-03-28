@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const todosRouter = require('./routes/todos');
 
 const app = express();
@@ -13,6 +14,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Middleware
 app.use(express.json());
+app.use(express.static('public'));
 
 // Базовый маршрут
 app.get('/', (req, res) => {
@@ -21,7 +23,7 @@ app.get('/', (req, res) => {
 
 // Маршрут О нас
 app.get('/about', (req, res) => {
-  res.send('О нас');
+  res.sendFile(path.join(__dirname, 'views', 'about.html'));
 });
 
 // Подключаем маршруты todos
