@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - Мебельный магазин</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Мебельный магазин</h1>
+        <p>Качественная мебель для вашего дома</p>
+    </header>
+
+    <nav>
+        <a href="/">Главная</a>
+        <a href="/about">О нас</a>
+        <a href="/todos">Задачи</a>
+        <a href="/cart" class="active">Корзина (<span id="cart-count">0</span>)</a>
+    </nav>
+
+    <main>
+        <h2 class="section-title">Корзина</h2>
+        <div class="cart-container">
+            <div id="cart-items" class="cart-items">
+                <!-- Товары будут добавляться динамически -->
+            </div>
+            <div class="cart-summary">
+                <h3>Итого</h3>
+                <div class="summary-item">
+                    <span>Товаров:</span>
+                    <span id="total-items">0</span>
+                </div>
+                <div class="summary-item">
+                    <span>Сумма:</span>
+                    <span id="total-price">0 ₽</span>
+                </div>
+                <button id="checkout-btn" class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Мебельный магазин. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Получаем корзину из localStorage или создаем пустую
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Обновляем отображение корзины
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const totalItems = document.getElementById('total-items');
+            const totalPrice = document.getElementById('total-price');
+            
+            cartItems.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h3>${item.name}</h3>
+                            <p>${item.description}</p>
+                            <p class="price">${item.price} ₽</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="remove-btn">×</button>
+                    </div>
+                `;
+            });
+            
+            cartCount.textContent = cart.length;
+            totalItems.textContent = cart.length;
+            totalPrice.textContent = `${total} ₽`;
+            
+            // Сохраняем корзину в localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // Удаление товара из корзины
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        // Оформление заказа
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Корзина пуста!');
+                return;
+            }
+            alert('Спасибо за заказ! Мы свяжемся с вами в ближайшее время.');
+            cart = [];
+            updateCart();
+        }
+
+        // Инициализация корзины при загрузке страницы
+        updateCart();
+    </script>
+</body>
+</html> 

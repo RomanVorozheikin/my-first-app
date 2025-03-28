@@ -26,6 +26,11 @@ app.get('/about', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'about.html'));
 });
 
+// Маршрут Корзина
+app.get('/cart', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'cart.html'));
+});
+
 // Подключаем маршруты todos
 app.use('/todos', todosRouter);
 

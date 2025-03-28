@@ -13,9 +13,10 @@
     </header>
 
     <nav>
-        <a href="/">Главная</a>
+        <a href="/" class="active">Главная</a>
         <a href="/about">О нас</a>
         <a href="/todos">Задачи</a>
+        <a href="/cart">Корзина (<span id="cart-count">0</span>)</a>
     </nav>
 
     <main>
@@ -27,7 +28,12 @@
                 <h3>Уютный диван "Комфорт"</h3>
                 <p>Мягкий и просторный диван с подушками</p>
                 <p class="price">29,999 ₽</p>
-                <button onclick="alert('Товар добавлен в корзину!')">В корзину</button>
+                <button onclick="addToCart({
+                    name: 'Уютный диван "Комфорт"',
+                    description: 'Мягкий и просторный диван с подушками',
+                    price: 29999,
+                    image: 'https://images.unsplash.com/photo-1617806118233-18e1de247200'
+                })">В корзину</button>
             </div>
 
             <div class="product-card">
@@ -36,7 +42,12 @@
                 <h3>Кровать "Соня"</h3>
                 <p>Ортопедическая кровать с матрасом</p>
                 <p class="price">34,999 ₽</p>
-                <button onclick="alert('Товар добавлен в корзину!')">В корзину</button>
+                <button onclick="addToCart({
+                    name: 'Кровать "Соня"',
+                    description: 'Ортопедическая кровать с матрасом',
+                    price: 34999,
+                    image: 'https://images.unsplash.com/photo-1617806118233-18e1de247200'
+                })">В корзину</button>
             </div>
 
             <div class="product-card">
@@ -44,7 +55,12 @@
                 <h3>Шкаф "Практик"</h3>
                 <p>Вместительный шкаф с зеркалом</p>
                 <p class="price">24,999 ₽</p>
-                <button onclick="alert('Товар добавлен в корзину!')">В корзину</button>
+                <button onclick="addToCart({
+                    name: 'Шкаф "Практик"',
+                    description: 'Вместительный шкаф с зеркалом',
+                    price: 24999,
+                    image: 'https://images.unsplash.com/photo-1617806118233-18e1de247200'
+                })">В корзину</button>
             </div>
 
             <div class="product-card">
@@ -52,7 +68,12 @@
                 <h3>Стол "Рабочий"</h3>
                 <p>Современный письменный стол</p>
                 <p class="price">12,999 ₽</p>
-                <button onclick="alert('Товар добавлен в корзину!')">В корзину</button>
+                <button onclick="addToCart({
+                    name: 'Стол "Рабочий"',
+                    description: 'Современный письменный стол',
+                    price: 12999,
+                    image: 'https://images.unsplash.com/photo-1617806118233-18e1de247200'
+                })">В корзину</button>
             </div>
         </div>
     </main>
@@ -77,6 +98,7 @@
     </footer>
 
     <script>
+        // Функции для чата
         function toggleChat() {
             const chat = document.querySelector('.chat-widget');
             chat.style.display = chat.style.display === 'none' ? 'flex' : 'none';
@@ -89,7 +111,6 @@
                 if (message) {
                     addMessage(message, 'user');
                     input.value = '';
-                    // Имитация ответа ассистента
                     setTimeout(() => {
                         addMessage('Спасибо за ваше сообщение! Наш менеджер свяжется с вами в ближайшее время.', 'assistant');
                     }, 1000);
@@ -105,6 +126,34 @@
             messages.appendChild(message);
             messages.scrollTop = messages.scrollHeight;
         }
+
+        // Функции для корзины
+        function addToCart(product) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification('Товар добавлен в корзину!');
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Инициализация счетчика корзины при загрузке страницы
+        updateCartCount();
     </script>
 </body>
 </html> 
