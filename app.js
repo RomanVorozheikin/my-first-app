@@ -21,6 +21,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
+// Маршрут Каталог
+app.get('/catalog', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'catalog.html'));
+});
+
 // Маршрут О нас
 app.get('/about', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'about.html'));

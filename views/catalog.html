@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - Мебельный магазин</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Мебельный магазин</h1>
+        <p>Качественная мебель для вашего дома</p>
+    </header>
+
+    <nav>
+        <a href="/">Главная</a>
+        <a href="/catalog" class="active">Каталог</a>
+        <a href="/about">О нас</a>
+        <a href="/cart">Корзина (<span id="cart-count">0</span>)</a>
+    </nav>
+
+    <main>
+        <div class="catalog-container">
+            <aside class="filters">
+                <h3>Фильтры</h3>
+                <div class="filter-section">
+                    <h4>Категории</h4>
+                    <label><input type="checkbox" value="sofas"> Диваны</label>
+                    <label><input type="checkbox" value="beds"> Кровати</label>
+                    <label><input type="checkbox" value="wardrobes"> Шкафы</label>
+                    <label><input type="checkbox" value="tables"> Столы</label>
+                </div>
+                <div class="filter-section">
+                    <h4>Цена</h4>
+                    <input type="range" min="0" max="50000" step="1000" class="price-range">
+                    <div class="price-inputs">
+                        <input type="number" placeholder="От" min="0">
+                        <input type="number" placeholder="До" min="0">
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <h4>Сортировка</h4>
+                    <select>
+                        <option value="popular">По популярности</option>
+                        <option value="price-asc">По цене (возр.)</option>
+                        <option value="price-desc">По цене (убыв.)</option>
+                    </select>
+                </div>
+            </aside>
+
+            <div class="catalog-content">
+                <div class="catalog-header">
+                    <h2>Каталог товаров</h2>
+                    <div class="view-options">
+                        <button class="view-btn active" data-view="grid">Сетка</button>
+                        <button class="view-btn" data-view="list">Список</button>
+                    </div>
+                </div>
+
+                <div class="products-grid" id="products-container">
+                    <!-- Товары будут добавляться динамически -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Мебельный магазин. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Данные о товарах
+        const products = [
+            {
+                name: "Уютный диван \"Комфорт\"",
+                description: "Мягкий и просторный диван с подушками",
+                price: 29999,
+                image: "https://images.unsplash.com/photo-1617806118233-18e1de247200",
+                category: "sofas"
+            },
+            {
+                name: "Кровать \"Соня\"",
+                description: "Ортопедическая кровать с матрасом",
+                price: 34999,
+                image: "https://images.unsplash.com/photo-1617806118233-18e1de247200",
+                category: "beds"
+            },
+            {
+                name: "Шкаф \"Практик\"",
+                description: "Вместительный шкаф с зеркалом",
+                price: 24999,
+                image: "https://images.unsplash.com/photo-1617806118233-18e1de247200",
+                category: "wardrobes"
+            },
+            {
+                name: "Стол \"Рабочий\"",
+                description: "Современный письменный стол",
+                price: 12999,
+                image: "https://images.unsplash.com/photo-1617806118233-18e1de247200",
+                category: "tables"
+            },
+            {
+                name: "Диван \"Семейный\"",
+                description: "Большой диван для всей семьи",
+                price: 39999,
+                image: "https://images.unsplash.com/photo-1617806118233-18e1de247200",
+                category: "sofas"
+            },
+            {
+                name: "Кровать \"Королевская\"",
+                description: "Широкий диван-кровать",
+                price: 45999,
+                image: "https://images.unsplash.com/photo-1617806118233-18e1de247200",
+                category: "beds"
+            }
+        ];
+
+        // Функции для корзины
+        function addToCart(product) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification('Товар добавлен в корзину!');
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Функции для отображения товаров
+        function renderProducts(productsToShow = products) {
+            const container = document.getElementById('products-container');
+            container.innerHTML = productsToShow.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <p class="price">${product.price} ₽</p>
+                    <button onclick='addToCart(${JSON.stringify(product)})'>В корзину</button>
+                </div>
+            `).join('');
+        }
+
+        // Функции для фильтрации
+        function filterProducts() {
+            const selectedCategories = Array.from(document.querySelectorAll('.filter-section input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.value);
+            
+            const minPrice = parseInt(document.querySelector('.price-inputs input[placeholder="От"]').value) || 0;
+            const maxPrice = parseInt(document.querySelector('.price-inputs input[placeholder="До"]').value) || Infinity;
+            
+            const sortBy = document.querySelector('select').value;
+
+            let filteredProducts = products.filter(product => {
+                const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(product.category);
+                const priceMatch = product.price >= minPrice && product.price <= maxPrice;
+                return categoryMatch && priceMatch;
+            });
+
+            // Сортировка
+            switch(sortBy) {
+                case 'price-asc':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'popular':
+                    // Здесь можно добавить логику сортировки по популярности
+                    break;
+            }
+
+            renderProducts(filteredProducts);
+        }
+
+        // Обработчики событий
+        document.querySelectorAll('.filter-section input, .filter-section select').forEach(input => {
+            input.addEventListener('change', filterProducts);
+        });
+
+        // Переключение вида
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const container = document.getElementById('products-container');
+                container.className = btn.dataset.view === 'grid' ? 'products-grid' : 'products-list';
+            });
+        });
+
+        // Инициализация
+        renderProducts();
+        updateCartCount();
+    </script>
+</body>
+</html> 
