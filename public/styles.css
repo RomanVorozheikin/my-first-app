@@ -22,6 +22,22 @@ header {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* Стили для шапки без слайдера */
+header:not(:has(.slider)) {
+  height: auto;
+  padding: 1rem;
+  background-color: #d4b5b0;
+}
+
+header:not(:has(.slider)) h1 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+header:not(:has(.slider)) p {
+  color: #2c3e50;
+}
+
 .slider {
   position: absolute;
   top: 0;
@@ -67,6 +83,7 @@ header {
   padding: 2rem;
   color: white;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  margin-top: 80px; /* Добавляем отступ сверху для контента */
 }
 
 .header-content h1 {
@@ -120,7 +137,7 @@ header {
 }
 
 .transparent-nav {
-  position: absolute;
+  position: fixed; /* Меняем на fixed */
   top: 0;
   left: 0;
   right: 0;
@@ -129,6 +146,8 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(0, 0, 0, 0.2); /* Добавляем полупрозрачный фон */
+  backdrop-filter: blur(5px);
 }
 
 .transparent-nav a {
@@ -146,11 +165,13 @@ header {
 .transparent-nav a:hover {
   border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .transparent-nav a.active {
   border-color: white;
   font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 768px) {
@@ -170,6 +191,8 @@ nav:not(.transparent-nav) {
   background-color: #d4b5b0;
   padding: 1rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 5;
 }
 
 nav:not(.transparent-nav) a {
